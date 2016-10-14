@@ -18,6 +18,10 @@ namespace RDB::Buffer
 			// alloc buffer
 			_buffer = new char[0x8000];
 		}
+		~DatabaseBuffer()
+		{
+			delete[] _buffer;
+		}
 
 		// Write functions
 		template <typename T> void Write(T val)

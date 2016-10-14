@@ -54,6 +54,7 @@ namespace RDB::Database
 			// Close buffer
 			buffer->Flush();
 			buffer->Close();
+			buffer->~DatabaseBuffer();
 		}
 		bool Save()
 		{
