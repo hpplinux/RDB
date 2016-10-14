@@ -13,7 +13,7 @@ namespace RDB::Database
 
 	public:
 		// Inserts a row into the table
-		DataRow &Insert(std::map < std::string, DataEntry > args)
+		DataRow &Insert(std::unordered_map < std::string, DataEntry > args)
 		{
 			// Alloc row and add it to the array
 			DataRow row(args);
@@ -24,7 +24,7 @@ namespace RDB::Database
 		}
 
 		// Selects the first row based on arguments specified
-		DataRow &Select(std::map < std::string, DataEntry > args)
+		DataRow &Select(std::unordered_map < std::string, DataEntry > args)
 		{
 			// Loop through stored rows
 			for (auto row : _data)

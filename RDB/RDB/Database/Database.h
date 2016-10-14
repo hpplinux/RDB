@@ -9,7 +9,7 @@ namespace RDB::Database
 	class Database
 	{
 	protected:
-		std::map < std::string, DataTable > _data;
+		std::unordered_map < std::string, DataTable > _data;
 		std::string							_name;
 	public:
 		// No arguments for a clean database

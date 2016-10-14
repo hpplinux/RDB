@@ -9,14 +9,14 @@ namespace RDB::Database
 	class DataRow
 	{
 	protected:
-		std::map < std::string, DataEntry > _data;
+		std::unordered_map < std::string, DataEntry > _data;
 
 	public:
 		DataRow()
 		{
 
 		}
-		DataRow(std::map < std::string, DataEntry > data)
+		DataRow(std::unordered_map < std::string, DataEntry > data)
 		{
 			_data = data;
 		}
