@@ -1,5 +1,3 @@
-// General Definitions
-
 // General Includes
 #include <iostream>
 #include <sstream>

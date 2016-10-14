@@ -1,3 +1,9 @@
+/*
+ *	RDB - A NoSQL local database written in C++
+ *	Author: https://github.com/MilkywayPwns
+ *	Date:	13 - 10 - 2016
+ */
+
 namespace RDB::Database
 {
 	class DataRow
