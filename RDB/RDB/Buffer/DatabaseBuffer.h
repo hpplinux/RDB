@@ -43,7 +43,7 @@ namespace RDB::Buffer
 		void WriteStr(std::string str)
 		{
 			strcpy((char*)(_buffer + _pos), str.c_str());
-			_pos += str.size();
+			_pos += str.size() + 1;
 		}
 		template <typename T> T Read()
 		{
@@ -55,7 +55,7 @@ namespace RDB::Buffer
 		std::string ReadStr()
 		{
 			std::string val((char*)(_buffer + _pos));
-			_pos += val.size();
+			_pos += val.size() + 1;
 
 			return val;
 		}
