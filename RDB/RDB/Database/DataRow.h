@@ -33,6 +33,7 @@ namespace RDB::Database
 			return _data[name];
 		}
 
+		// Save/Load
 		void Save(Buffer::DatabaseBuffer *buffer)
 		{
 			// Write entry count
@@ -43,6 +44,25 @@ namespace RDB::Database
 			{
 				buffer->WriteStr(entry.first);		// Write entry name
 				entry.second.Save(buffer);			// Write entry data
+			}
+		}
+		void Load(Buffer::DatabaseBuffer *buffer)
+		{
+			// Read amount of DataRows
+			size_t entries = buffer->Read<size_t>();
+
+			// Read rows
+			for (size_t i = 0; i < entries; i++)
+			{
+				// Read entry name
+				std::string name = buffer->ReadStr();
+
+				// Alloc entry and load data
+				DataEntry entry;
+				entry.Load(buffer);
+
+				// Add entry to array
+				_data[name] = entry;
 			}
 		}
 

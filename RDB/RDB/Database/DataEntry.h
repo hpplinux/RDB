@@ -76,10 +76,16 @@ namespace RDB::Database
 			return _raw;
 		}
 
+		// Save/Load
 		void Save(Buffer::DatabaseBuffer *buffer)
 		{
 			// Write value of this Entry
 			buffer->WriteStr(_raw);
+		}
+		void Load(Buffer::DatabaseBuffer *buffer)
+		{
+			// Read value for this entry
+			_raw = buffer->ReadStr();
 		}
 
 		// Clears data in this entry

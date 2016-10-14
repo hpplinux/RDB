@@ -14,15 +14,20 @@ namespace RDB::Buffer
 		std::size_t		_pos;
 
 	public:
-		DatabaseBuffer(std::string filename)
+		DatabaseBuffer(std::string filename, int mode)
 		{
 			_pos = 0;
 
 			// open file buffer
-			_fb.open(filename, (std::ios::out | std::ios::binary));
+			_fb.open(filename, mode);
 
 			// alloc buffer
 			_buffer = new char[0x8000];
+		}
+		DatabaseBuffer(const void *memory, size_t size)
+		{
+			_pos = 0;
+			_buffer = (char*)memory;
 		}
 		~DatabaseBuffer()
 		{
@@ -40,7 +45,35 @@ namespace RDB::Buffer
 			strcpy((char*)(_buffer + _pos), str.c_str());
 			_pos += str.size();
 		}
+		template <typename T> T Read()
+		{
+			T val = *(T*)(_buffer + _pos);
+			_pos += sizeof(T);
 
+			return val;
+		}
+		std::string ReadStr()
+		{
+			std::string val((char*)(_buffer + _pos));
+			_pos += val.size();
+
+			return val;
+		}
+
+		void Init()
+		{
+			// Copies raw data into buffer
+			std::istream _is(&_fb);
+			
+			// Calculate buffer size
+			std::streampos fsize = _is.tellg();
+			_is.seekg(0, std::ios::end);
+			fsize = _is.tellg() - fsize;
+			_is.seekg(0, std::ios::beg);
+
+			// Read to buffer
+			_is.read(_buffer, fsize);
+		}
 		void Flush()
 		{
 			// flush data to disk

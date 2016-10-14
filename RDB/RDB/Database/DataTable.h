@@ -50,7 +50,7 @@ namespace RDB::Database
 			return DataRow();
 		}
 
-		// Saves database to disk
+		// Save/load
 		void Save(Buffer::DatabaseBuffer *buffer)
 		{
 			// Write amount of DataRows
@@ -59,6 +59,22 @@ namespace RDB::Database
 			// Write DataRows
 			for (auto row : _data)
 				row.Save(buffer);
+		}
+		void Load(Buffer::DatabaseBuffer *buffer)
+		{
+			// Read amount of DataRows
+			size_t rows = buffer->Read<size_t>();
+
+			// Read rows
+			for (size_t i = 0; i < rows; i++)
+			{
+				// Alloc row and load its data
+				DataRow row;
+				row.Load(buffer);
+
+				// Add row to vector
+				_data.push_back(row);
+			}
 		}
 
 		// Clears all data in this table

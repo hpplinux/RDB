@@ -21,11 +21,56 @@ namespace RDB::Database
 		Database(std::string filename)
 		{
 			_name = filename;
+
+			// Alloc buffer
+			auto buffer = new Buffer::DatabaseBuffer(filename, (std::ios::in | std::ios::binary));
+			buffer->Init();				// Load file into memory
+
+			// Read DataTable count
+			size_t num_tables = buffer->Read<size_t>();
+
+			// Loop through tables
+			for (size_t i = 0; i < num_tables; i++)
+			{
+				// Read table name
+				std::string name = buffer->ReadStr();
+
+				// Load table data
+				DataTable table;
+				table.Load(buffer);
+
+				// Store table
+				_data[name] = table;
+			}
+
+			// Close the file, delete the buffer
+			buffer->Close();
+			buffer->~DatabaseBuffer();
 		}
 		// Load database from memory
 		Database(const void *memory, std::size_t size)
 		{
-			_name = "";
+			// Alloc buffer
+			auto buffer = new Buffer::DatabaseBuffer(memory, size);
+
+			// Read DataTable count
+			size_t num_tables = buffer->Read<size_t>();
+
+			// Loop through tables
+			for (size_t i = 0; i < num_tables; i++)
+			{
+				// Read table name
+				std::string name = buffer->ReadStr();
+
+				// Load table data
+				DataTable table;
+				table.Load(buffer);
+
+				// Store table
+				_data[name] = table;
+			}
+
+			// We don't want to close the file here, or delete the buffer, as we're reading from memory
 		}
 
 		// Functions
@@ -39,7 +84,7 @@ namespace RDB::Database
 			_name = filename;
 
 			// Open DatabaseBuffer
-			auto buffer = new Buffer::DatabaseBuffer(_name);
+			auto buffer = new Buffer::DatabaseBuffer(_name, (std::ios::out | std::ios::binary));
 
 			// Write amount of tables to disk
 			buffer->Write(_data.size());
