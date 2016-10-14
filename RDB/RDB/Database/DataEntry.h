@@ -94,6 +94,7 @@ namespace RDB::Database
 			_raw.clear();
 		}
 
+		// Generate operators and To* functions
 		DATAENTRY_TYPE(int32_t, ToInt32, std::stoi)
 		DATAENTRY_TYPE(uint32_t, ToUint32, std::stoul)
 		DATAENTRY_TYPE(int64_t, ToInt64, std::stoll)

@@ -4,7 +4,7 @@
  *	Date:	13 - 10 - 2016
  */
 
-#include "..\stdafx.h"
+#include "..\RDB\RDB.h"
 
 void Example1()
 {

@@ -19,8 +19,8 @@ namespace RDB::Database
 			DataRow row(args);
 			_data.push_back(row);
 
-			// Return row reference
-			return row;
+			// Return latest inserted row
+			return _data.back();
 		}
 
 		// Selects the first row based on arguments specified
