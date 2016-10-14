@@ -26,12 +26,14 @@ void Example1()
 		}
 	)["username"] = "username_test";
 
-	// Show values
-	RDB::Database::DataRow row = db["users"].Select(
+	// Add new columns to an existing data row
+	RDB::Database::DataRow &row = db["users"].Select(
 		{
 			{ "username", RDB::Database::DataEntry("username_test") }
 		}
 	);
+	row["email"] = "test@gmail.com";
+	row["age"] = 21;
 
 	// Store database to disk
 	db.Save("test.db");
