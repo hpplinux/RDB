@@ -76,6 +76,12 @@ namespace RDB::Database
 			return _raw;
 		}
 
+		void Save(Buffer::DatabaseBuffer *buffer)
+		{
+			// Write value of this Entry
+			buffer->WriteStr(_raw);
+		}
+
 		// Clears data in this entry
 		void Clear()
 		{

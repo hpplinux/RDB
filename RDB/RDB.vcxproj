@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="RDB\Buffer\DatabaseBuffer.h" />
     <ClInclude Include="RDB\Database\Database.h" />
     <ClInclude Include="RDB\Database\DataEntry.h" />
     <ClInclude Include="RDB\Database\DataRow.h" />

@@ -33,5 +33,6 @@ void Example1()
 		}
 	);
 
-	printf("Username: %s\nUID: %i\n", row["username"].ToString().c_str(), row["uid"].ToInt32());
+	// Store database to disk
+	db.Save("test.db");
 }

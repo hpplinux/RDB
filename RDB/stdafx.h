@@ -5,6 +5,7 @@
 #include <map>				// We might include boost_map later on, as it seems to be faster.
 #include <vector>
 #include <memory>
+#include <fstream>
 
 // Project Definitions
 #define RDB_COMPILING

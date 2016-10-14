@@ -35,7 +35,25 @@ namespace RDB::Database
 			if (!filename.size())
 				return false;
 
-			// Flush data
+			// Update filename
+			_name = filename;
+
+			// Open DatabaseBuffer
+			auto buffer = new Buffer::DatabaseBuffer(_name);
+
+			// Write amount of tables to disk
+			buffer->Write(_data.size());
+
+			// Loop through datatables
+			for (auto table : _data)
+			{
+				buffer->WriteStr(table.first);		// Write table name
+				table.second.Save(buffer);			// Write table data
+			}
+
+			// Close buffer
+			buffer->Flush();
+			buffer->Close();
 		}
 		bool Save()
 		{

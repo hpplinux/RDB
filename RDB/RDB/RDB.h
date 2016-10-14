@@ -11,6 +11,7 @@
 #endif
 
 // Include files
+#include "Buffer/DatabaseBuffer.h"
 #include "Database/DataEntry.h"
 #include "Database/DataRow.h"
 #include "Database/DataTable.h"

@@ -33,6 +33,19 @@ namespace RDB::Database
 			return _data[name];
 		}
 
+		void Save(Buffer::DatabaseBuffer *buffer)
+		{
+			// Write entry count
+			buffer->Write(_data.size());
+
+			// Loop through entries
+			for (auto entry : _data)
+			{
+				buffer->WriteStr(entry.first);		// Write entry name
+				entry.second.Save(buffer);			// Write entry data
+			}
+		}
+
 		// Clears all data in this row
 		void Clear()
 		{

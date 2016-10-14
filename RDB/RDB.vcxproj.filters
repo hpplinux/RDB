@@ -33,6 +33,9 @@
     <ClInclude Include="RDB\Database\DataTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RDB\Buffer\DatabaseBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

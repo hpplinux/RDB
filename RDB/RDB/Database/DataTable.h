@@ -50,6 +50,17 @@ namespace RDB::Database
 			return DataRow();
 		}
 
+		// Saves database to disk
+		void Save(Buffer::DatabaseBuffer *buffer)
+		{
+			// Write amount of DataRows
+			buffer->Write(_data.size());
+
+			// Write DataRows
+			for (auto row : _data)
+				row.Save(buffer);
+		}
+
 		// Clears all data in this table
 		void Clear()
 		{
