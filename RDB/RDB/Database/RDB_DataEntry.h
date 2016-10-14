@@ -20,6 +20,10 @@ namespace RDB::Database
 		{
 			_raw = str;
 		}
+		DataEntry(const char *str)
+		{
+			_raw = std::string(str);
+		}
 
 #define DATAENTRY_TYPE(__in_type, __convert_name, __convert_func) \
 		DataEntry(__in_type __in_arg) \
@@ -62,6 +66,11 @@ namespace RDB::Database
 			return (in != _raw);
 		}
 		DataEntry &operator=(std::string str)
+		{
+			_raw = str;
+			return *this;
+		}
+		DataEntry &operator=(const char *str)
 		{
 			_raw = str;
 			return *this;
