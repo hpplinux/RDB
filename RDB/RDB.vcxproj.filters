@@ -18,19 +18,19 @@
     <ClInclude Include="RDB\RDB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RDB\Database\Database.h">
+    <ClInclude Include="RDB\Buffer\RDB_DatabaseBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RDB\Database\DataEntry.h">
+    <ClInclude Include="RDB\Database\RDB_Database.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RDB\Database\DataRow.h">
+    <ClInclude Include="RDB\Database\RDB_DataTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RDB\Database\DataTable.h">
+    <ClInclude Include="RDB\Database\RDB_DataRow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RDB\Buffer\DatabaseBuffer.h">
+    <ClInclude Include="RDB\Database\RDB_DataEntry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

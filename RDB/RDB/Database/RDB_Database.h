@@ -101,10 +101,13 @@ namespace RDB::Database
 			buffer->Flush();
 			buffer->Close();
 			buffer->~DatabaseBuffer();
+
+			// Return true when succeeded
+			return true;
 		}
 		bool Save()
 		{
-			Save(_name);
+			return Save(_name);
 		}
 
 		// Deletes the entire database.

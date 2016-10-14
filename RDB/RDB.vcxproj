@@ -127,11 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="RDB\Buffer\DatabaseBuffer.h" />
-    <ClInclude Include="RDB\Database\Database.h" />
-    <ClInclude Include="RDB\Database\DataEntry.h" />
-    <ClInclude Include="RDB\Database\DataRow.h" />
-    <ClInclude Include="RDB\Database\DataTable.h" />
+    <ClInclude Include="RDB\Buffer\RDB_DatabaseBuffer.h" />
+    <ClInclude Include="RDB\Database\RDB_Database.h" />
+    <ClInclude Include="RDB\Database\RDB_DataEntry.h" />
+    <ClInclude Include="RDB\Database\RDB_DataRow.h" />
+    <ClInclude Include="RDB\Database\RDB_DataTable.h" />
     <ClInclude Include="RDB\RDB.h" />
   </ItemGroup>
   <ItemGroup>

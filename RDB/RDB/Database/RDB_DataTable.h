@@ -27,14 +27,14 @@ namespace RDB::Database
 		DataRow &Select(std::unordered_map < std::string, DataEntry > args)
 		{
 			// Loop through stored rows
-			for (auto row : _data)
+			for (size_t i = 0; i < _data.size(); i++)
 			{
 				bool bRowFound = true;
 
 				// Loop through arguments
 				for (auto column : args)
 				{
-					if (row[column.first] != column.second)
+					if (_data.at(i)[column.first] != column.second)
 					{
 						bRowFound = false;
 						break;
@@ -43,7 +43,7 @@ namespace RDB::Database
 
 				// Check if row has been found
 				if (bRowFound)
-					return row;
+					return _data.at(i);
 			}
 
 			// Return empty row
