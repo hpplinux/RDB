@@ -23,7 +23,7 @@ namespace RDB::Database
 			_name = filename;
 
 			// Alloc buffer
-			auto buffer = new Buffer::DatabaseBuffer(filename, (std::ios::in | std::ios::binary));
+			auto buffer = new Buffer::DatabaseBuffer(filename, (std::ios::in | std::ios::binary), 0);
 			buffer->Init();				// Load file into memory
 
 			// Read DataTable count
@@ -84,7 +84,7 @@ namespace RDB::Database
 			_name = filename;
 
 			// Open DatabaseBuffer
-			auto buffer = new Buffer::DatabaseBuffer(_name, (std::ios::out | std::ios::binary));
+			auto buffer = new Buffer::DatabaseBuffer(_name, (std::ios::out | std::ios::binary), 0);
 
 			// Write amount of tables to disk
 			buffer->Write(_data.size());
@@ -104,6 +104,12 @@ namespace RDB::Database
 		bool Save()
 		{
 			Save(_name);
+		}
+
+		// Deletes the entire database.
+		void Clear()
+		{
+			_data.clear();
 		}
 
 		// Operators
