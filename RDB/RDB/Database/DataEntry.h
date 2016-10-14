@@ -6,50 +6,82 @@ namespace RDB::Database
 		std::string _raw;
 
 	public:
+		DataEntry()
+		{
+			_raw = "";
+		}
+		DataEntry(std::string str)
+		{
+			_raw = str;
+		}
+
 #define DATAENTRY_TYPE(__in_type, __convert_name, __convert_func) \
-		DataEntry(__in_type __in) \
+		DataEntry(__in_type __in_arg) \
 		{ \
-			_raw = std::to_string(__in_type(__in)); \
+			_raw = std::to_string(__in_type(__in_arg)); \
 		} \
-		DataEntry operator=(__in_type __in) \
+		DataEntry &operator=(__in_type __in_arg) \
 		{ \
-			_raw = std::to_string(__in_type(__in)); \
+			_raw = std::to_string(__in_type(__in_arg)); \
+			return *this; \
 		} \
 		__in_type __convert_name() \
 		{ \
 			return __convert_func(_raw); \
+		} \
+		bool operator==(__in_type __in_arg) \
+		{ \
+			return (__convert_func(_raw) == __in_arg); \
+		} \
+		bool operator!=(__in_type __in_arg) \
+		{ \
+			return (__convert_func(_raw) == __in_arg); \
 		}
 
-		/*
-		bool operator==(__in_type __in) \
-		{ \
-			return (__convert_func(_raw) == __in); \
-		} \
-		bool operator!=(__in_type __in) \
-		{ \
-			return (__convert_func(_raw) != __in); \
-		} \
-		bool operator<=(__in_type __in) \
-		{ \
-			return (__convert_func(_raw) <= __in); \
-		} \
-		bool operator>=(__in_type __in) \
-		{ \
-			return (__convert_func(_raw) >= __in); \
-		} \
-		bool operator<(__in_type __in) \
-		{ \
-			return (__convert_func(_raw) < __in); \
-		} \
-		bool operator>(__in_type __in) \
-		{ \
-			return (__convert_func(_raw) > __in); \
+		// Manual operators
+		bool operator==(DataEntry in)
+		{
+			return (in._raw == _raw);
 		}
-		*/
+		bool operator!=(DataEntry in)
+		{
+			return (in._raw != _raw);
+		}
+		bool operator==(std::string in)
+		{
+			return (in == _raw);
+		}
+		bool operator!=(std::string in)
+		{
+			return (in != _raw);
+		}
+		DataEntry &operator=(std::string str)
+		{
+			_raw = str;
+			return *this;
+		}
+		DataEntry &operator=(DataEntry in)
+		{
+			_raw = in._raw;
+			return *this;
+		}
+		std::string ToString()
+		{
+			return _raw;
+		}
+
+		// Clears data in this entry
+		void Clear()
+		{
+			_raw.clear();
+		}
 
 		DATAENTRY_TYPE(int32_t, ToInt32, std::stoi)
 		DATAENTRY_TYPE(uint32_t, ToUint32, std::stoul)
 		DATAENTRY_TYPE(int64_t, ToInt64, std::stoll)
 		DATAENTRY_TYPE(uint64_t, ToUint64, std::stoull)
+		DATAENTRY_TYPE(float, ToFloat, std::stof)
+		DATAENTRY_TYPE(double, ToDouble, std::stod)
+		DATAENTRY_TYPE(long double, ToLongDouble, std::stold)
 	};
 }
