@@ -4,10 +4,27 @@
  *	Date:	13 - 10 - 2016
  */
 
-#ifdef RDB_COMPILING
-#define RDB_LIB __declspec(dllexport)
-#else
-#define RDB_LIB extern 
+// Headers needed for RDB
+#ifndef _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+#ifndef _IOSTREAM_
+#include <iostream>
+#endif
+#ifndef _SSTREAM_
+#include <sstream>
+#endif
+#ifndef _STDINT
+#include <stdint.h>
+#endif
+#ifndef _UNORDERED_MAP_
+#include <unordered_map>				// We might include boost_map later on, as it seems to be faster.
+#endif
+#ifndef _VECTOR_
+#include <vector>
+#endif
+#ifndef _FSTREAM_
+#include <fstream>
 #endif
 
 // Include files

@@ -36,5 +36,5 @@ void Example1()
 	row["age"] = 21;
 
 	// Store database to disk
-	db.Save("test.db");
+	db.Save("test.rdb");
 }
