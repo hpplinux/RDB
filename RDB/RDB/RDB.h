@@ -4,5 +4,8 @@
 #define RDB_LIB extern 
 #endif
 
+// Include files
 #include "Database/DataEntry.h"
+#include "Database/DataRow.h"
+#include "Database/DataTable.h"
 #include "Database/Database.h"

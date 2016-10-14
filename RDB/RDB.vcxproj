@@ -125,10 +125,15 @@
   <ItemGroup>
     <ClInclude Include="RDB\Database\Database.h" />
     <ClInclude Include="RDB\Database\DataEntry.h" />
+    <ClInclude Include="RDB\Database\DataRow.h" />
+    <ClInclude Include="RDB\Database\DataTable.h" />
     <ClInclude Include="RDB\RDB.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Examples\Example1.cpp">
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
