@@ -18,13 +18,16 @@
 #include <stdint.h>
 #endif
 #ifndef _UNORDERED_MAP_
-#include <unordered_map>				// We might include boost_map later on, as it seems to be faster.
+#include <unordered_map>
 #endif
 #ifndef _VECTOR_
 #include <vector>
 #endif
 #ifndef _FSTREAM_
 #include <fstream>
+#endif
+#ifndef _MUTEX_
+#include <mutex>
 #endif
 
 // Include files

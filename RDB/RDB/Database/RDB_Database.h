@@ -21,32 +21,7 @@ namespace RDB::Database
 		// Load database from file
 		Database(std::string filename)
 		{
-			_name = filename;
-
-			// Alloc buffer
-			auto buffer = new Buffer::DatabaseBuffer(filename, (std::ios::in | std::ios::binary), 0);
-			buffer->Init();				// Load file into memory
-
-			// Read DataTable count
-			size_t num_tables = buffer->Read<size_t>();
-
-			// Loop through tables
-			for (size_t i = 0; i < num_tables; i++)
-			{
-				// Read table name
-				std::string name = buffer->ReadStr();
-
-				// Load table data
-				DataTable table;
-				table.Load(buffer);
-
-				// Store table
-				_data[name] = table;
-			}
-
-			// Close the file, delete the buffer
-			buffer->Close();
-			buffer->~DatabaseBuffer();
+			this->Load(filename);
 		}
 		// Load database from memory
 		Database(const void *memory, std::size_t size)
@@ -108,6 +83,50 @@ namespace RDB::Database
 		bool Save()
 		{
 			return Save(_name);
+		}
+		void Load(std::string filename)
+		{
+			_name = filename;
+
+			// Attempt to open file, to check if it exists
+			std::filebuf fb;
+			fb.open(filename, std::ios::in);
+
+			if (fb.is_open())
+			{
+				// Close file
+				fb.close();
+
+				// Alloc buffer
+				auto buffer = new Buffer::DatabaseBuffer(filename, (std::ios::in | std::ios::binary), 0);
+				buffer->Init();				// Load file into memory
+
+											// Read DataTable count
+				size_t num_tables = buffer->Read<size_t>();
+
+				// Loop through tables
+				for (size_t i = 0; i < num_tables; i++)
+				{
+					// Read table name
+					std::string name = buffer->ReadStr();
+
+					// Load table data
+					DataTable table;
+					table.Load(buffer);
+
+					// Store table
+					_data[name] = table;
+				}
+
+				// Close the file, delete the buffer
+				buffer->Close();
+				buffer->~DatabaseBuffer();
+			}
+		}
+
+		size_t Size()
+		{
+			return _data.size();
 		}
 
 		// Deletes the entire database.

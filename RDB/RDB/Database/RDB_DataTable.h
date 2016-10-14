@@ -46,8 +46,11 @@ namespace RDB::Database
 					return _data.at(i);
 			}
 
-			// Return empty row
-			return DataRow();
+			// Add selected row values to this row
+			DataRow row(args);
+			_data.push_back(row);
+
+			return _data.back();
 		}
 
 		// Save/load
@@ -81,6 +84,11 @@ namespace RDB::Database
 		void Clear()
 		{
 			_data.clear();
+		}
+
+		size_t Size()
+		{
+			return _data.size();
 		}
 	};
 }

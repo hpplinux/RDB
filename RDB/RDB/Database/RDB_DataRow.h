@@ -71,5 +71,10 @@ namespace RDB::Database
 		{
 			_data.clear();
 		}
+
+		size_t Size()
+		{
+			return _data.size();
+		}
 	};
 }
