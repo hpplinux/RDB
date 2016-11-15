@@ -72,7 +72,7 @@ namespace RDB::Database
 		}
 		DataEntry &operator=(const char *str)
 		{
-			_raw = str;
+			_raw = std::string(str);
 			return *this;
 		}
 		DataEntry &operator=(DataEntry in)

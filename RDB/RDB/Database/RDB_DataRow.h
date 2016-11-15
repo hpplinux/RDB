@@ -66,15 +66,28 @@ namespace RDB::Database
 			}
 		}
 
-		// Clears all data in this row
-		void Clear()
+		size_t BufferSize()
 		{
-			_data.clear();
+			size_t ret = sizeof(size_t);
+
+			for (auto entry : _data)
+			{
+				ret += entry.first.size() + 1;
+				ret += entry.second.Size() + 1;
+			}
+
+			return ret;
 		}
 
 		size_t Size()
 		{
 			return _data.size();
+		}
+
+		// Clears all data in this row
+		void Clear()
+		{
+			_data.clear();
 		}
 	};
 }

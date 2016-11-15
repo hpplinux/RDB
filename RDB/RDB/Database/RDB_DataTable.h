@@ -46,11 +46,27 @@ namespace RDB::Database
 					return _data.at(i);
 			}
 
-			// Add selected row values to this row
+			// Allocate DataRow
 			DataRow row(args);
-			_data.push_back(row);
 
+			// Return empty row
+			_data.push_back(row);
 			return _data.back();
+		}
+
+		size_t BufferSize()
+		{
+			size_t ret = sizeof(size_t);
+
+			for (auto row : _data)
+				ret += row.BufferSize() + 1;
+
+			return ret;
+		}
+
+		size_t Size()
+		{
+			return _data.size();
 		}
 
 		// Save/load
@@ -84,11 +100,6 @@ namespace RDB::Database
 		void Clear()
 		{
 			_data.clear();
-		}
-
-		size_t Size()
-		{
-			return _data.size();
 		}
 	};
 }
